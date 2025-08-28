@@ -1,0 +1,128 @@
+@import "frappe.css";
+
+* {
+  font-family: Ubuntu Nerd Font;
+  font-size: 20px;
+  min-height: 0;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+  margin: 5px 5px;
+}
+
+#workspaces {
+  border-radius: 1rem;
+  margin: 5px;
+  background-color: rgba(50,50,68,0.8);
+  margin-left: 1rem;
+}
+
+#workspaces button {
+  color: @sky;
+  border-radius: 1rem;
+  padding: 0.4rem;
+}
+
+#workspaces button.active {
+  color: @green;
+  border-radius: 1rem;
+}
+
+#workspaces button:hover {
+  color: @peach;
+  border-radius: 1rem;
+}
+
+#window {
+  color: #ffffff;
+  background-color: rgba(0,0,0,0.2);
+  padding: 0.5rem 1rem;
+  margin: 5px 0;
+  border-radius: 1rem;
+  border: 2px solid #85c1dc;
+}
+
+#tray {
+  margin-right: 1rem;
+  border-radius: 1rem;
+}
+
+#custom-music {
+  color: @mauve;
+  border-radius: 1rem;
+}
+
+#tray,
+#custom-music,
+#backlight,
+#pulseaudio,
+#battery,
+#clock,
+#custom-lock,
+#custom-power {
+  background-color: rgba(50,50,68,0.8);
+  padding: 0.5rem 1rem;
+  margin: 5px 0;
+}
+
+#backlight {
+  color: @yellow;
+  border-radius: 1rem 0px 0px 1rem;
+  margin-left: 1rem;
+}
+
+#pulseaudio {
+  color: @maroon;
+}
+
+#battery {
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+
+#pulseaudio, #battery {
+  border-radius: 0;
+}
+
+#clock {
+  color: @blue;
+  border-radius: 0px 1rem 1rem 0px;
+  margin-right: 1rem;
+}
+
+#custom-lock {
+  border-radius: 1rem 0px 0px 1rem;
+  color: @lavender;
+}
+
+#custom-power {
+  margin-right: 1rem;
+  border-radius: 0px 1rem 1rem 0px;
+  color: @red;
+}
+
+/* #network, */
+/* #bluetooth { */
+/*   background-color: rgba(50,50,68,0.8); */
+/*   padding: 0.5rem 1rem; */
+/*   margin: 5px 0; */
+/*   color: @sapphire; */
+/* } */
+
+/* #network { */
+/*   border-radius: 1rem 0px 0px 1rem; */
+/* } */
+/**/
+/* #bluetooth { */
+/*   border-radius: 0px 1rem 1rem 0px; */
+/* } */
