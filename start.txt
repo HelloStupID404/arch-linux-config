@@ -1,0 +1,98 @@
+================================================================================
+-- This is a tutorial for installing Arch Linux OS on Windows11
+================================================================================
+1. 通过"磁盘管理"(文件资源管理->此电脑->右键->显示更多属性->管理->磁盘管理->右键D盘)
+  中的"压缩卷"功能从D盘(不要选Windows系统资源盘, 如C盘)
+  分出一部分存储空间(大于等于50GB, 显示为未分配区域)用于ArchLinux系统使用
+2. 准备一个U盘(大于等于4GB), 选择下载好的ArchLinux的iso文件并使用"rufus"等工具制作启动盘
+  (官网:https://archlinux.org/ 必须通过特定启动盘才能在安装新系统时被识别)
+3. 关闭Windows的"快速重启"功能
+4. 关闭Windows的"security boot"(否则无法进入安装系统界面):
+  通过(设置)->(Windows更新)->(高级选项)->(恢复)->(高级启动)
+  ->(重启自动进入蓝屏界面)->(高级)->(UEFI)->(进入BIOS界面)->(创建管理员密码)->(关闭security
+  boot)->(保存并退出)->(可能触发Windows的BitLocker磁盘安全保护机制,
+  需要登录界面给出网站输入48位密钥)
+5. 通过(设置)->(Windows更新)->(高级选项)->(恢复)->(高级启动)
+  ->(重启自动进入蓝屏界面)->(高级)->(通过U盘)->(等待资源加载进入Live环境)
+================================================================================
+1. 使用"fdisk -l"命令查看系统文件分区  (下面展示个人电脑分区情况, 下面操作要小心!!!)
+  /dev/nvme0n1p1/    (EFI分区, 存放不同操作系统入口信息相关文件, 此时已经有Windows,
+                      之后要将Arch的启动信息也加入进去, 千万不要删该分区!!!)
+  /dev/nvme0n1p2/    (Windows保留区, 不用管)
+  /dev/nvme0n1p3/    (Windows C盘)
+  /dev/nvme0n1p4/    (Windows D盘)
+  /dev/nvme0n1p5/    (Windows 恢复分区)
+  ......             (此时无法看到自己之前从D盘分给ArchLinux的空间分区,
+                      因为那属于未分配区)
+2. 使用"cfdisk"命令进入分区管理界面:
+  根据分区大小再三确定之前分出的空间(绿色的"Free space"), (New)->(Write)->(Quit)
+3. 先格式化新分配分区: mkfs.ext4 /dev/nvme0n1p6  (我的新分配分区为nvme0n1p6,
+                                                  根据实际情况而定)
+4. 挂载根分区目录  (Linux系统需要先挂载才能访问外部磁盘内容)
+     使用"mount /dev/nvme0n1p6 /mnt"  ("mnt"表示"mount"挂载, 将nvme0n1p6新分区作为根目录,
+     简单起见, 先只确定根目录分区, swap等分区根据个人情况选择, 这里不作说明.
+     如果挂错位置需通过命令:"umount /mnt"先取消挂载点再重新挂载)
+5. 使用"mkdir -p /mnt/boot/efi"命令创建即将挂载的efi的目录  (目录名称约定俗称,
+  新手最好保持一致)
+6. 使用命令:"/dev/nvme0n1p1 /mnt/boot/efi"  (挂载EFI分区到/boot/efi目录,
+   可根据"fdisk -l"命令展示的Type属性"EFI System"来确定EFI分区)
+7. 生成fstb: "genfstab -U /mnt >> /mnt/etc/fstab"
+8. 使用"iwctl"命令进入网络连接环境 (最好联网!!!)
+  [iwctl] device list  (查看)
+  [iwctl] station <无线网卡名> scan  (WiFi扫描)
+  [iwctl] station <无线网卡名> get-networks  (查看连接情况)
+  [iwctl] station <无线网卡名> connect "WiFi名"  (要输入密码)
+  [iwctl] exit  (连接成功记得退出)
+9. 进入新系统: "arch-chroot /mnt"
+================================================================================
+1. 安装网络管理器: "pacman -S networkmanager"  (Arch自带的包管理器pacman)
+                   "systemctl enable NetworkManager"  (允许开机自启)
+                   "systemctl start NetworkManager"  (立即开启)
+  (此时使用的网络管理器是Live环境下的, 属于U盘里的东西, 需要给ArchLinux也安装,
+  否则到时候重启进入ArchLinux无法联网还得回来, 很麻烦!!!)
+2. 安装文本编辑器: "pacman -S nano"
+  (nano或vim/nvim, 没用过"vim"的不要下载!!! "nano"有提示, 适合新手)
+3. 安装并配置重启引导程序GRUB: "pacman -S grub efibootmgr os-prober"  (这里安装了三个东西, 都有用)
+    "grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB"
+    "nano /etc/default/grub"  (使用nano代开配置文件, 更改行:
+      [GRUB_DISABLE_OS_PROBER=false]为[false], 表示允许探测, 用来探测Windows系统)
+    "grub-mkconfig -o /boot/grub/grub.cfg"  (读取配置文件并生成GRUB开机配置)
+4. 设置时区: "ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
+              "hwclock --systohc"
+5. 设置语言: "nano /etc/locale.gen" (将[# en_US.UTF-8 UTF-8]行首的注释"#"删除)
+             "locale-gen"
+             "echo "LANG=en_US.UTF-8" > /etc/locale.conf"
+6. 设置主机名: [echo "arch-linux" > /etc/hostname]
+               "nano /etc/hosts"  (打开nano加上属性对应的值, 已经有的内容不用改)
+                   127.0.0.1    localhost
+                   ::1          localhost
+                   127.0.1.1    archpc.localdomain archpc
+7. 设置root管理员密码: "passwd"  (最初建议密码设置为root)
+8. 配置完成后退出chroot: "exit"
+                         "umount -R /mnt"
+                         "reboot"
+================================================================================
+1. 重启进入GRUB界面, 默认5秒进入ArchLinux, 或者选中按回车
+2. 创建用户: "useradd -m -G wheel -s /bin/bash yourname"  (yourname自己设置)
+             "passwd yourname"  (先输入命令后输入用户密码)
+3. 编辑sudo权限文件: "EDITOR=nano visudo"
+                     去掉 [%wheel ALL=(ALL:ALL) ALL] 前面注释
+5. 使用命令"nmtui"打开网络管理器终端界面连接网络
+6. 更新系统: "pacman -Syu"
+7. "pacman -S sudo"  (安装sudo, 方便普通用户下载资源, 否则每次都要切换为root)
+8. 下载中文字体: "sudo pacman -S noto-fonts-cjk"
+================================================================================
+-- 到这里ArchLinux基本配置完成, 下面给出其它的一些建议
+================================================================================
+1. 新手可能不适应终端环境, 建议下载gnome完整桌面环境:
+  "sudo pacman -S gnome gnome-extra"  (数据可能比较大, 但下载速度还行)
+2. 下载其它工具时pacman使用官方仓库可能没有, 需要安装"yay"或者"paru"包管理器,
+  但这两个包管理器下载某些资源时连不上仓库, 需要科学上网,
+  可选择clash内核+clashctl / mihomo GUI.For.Clash / Clash-Verge等工具
+3.如果使用GUI代理, 需要在终端环境引入代理环境, 否则只有浏览器能走代理:
+  export http_proxy=http://127.0.0.1:7890
+  export https_proxy=http://127.0.0.1:7890
+  unset http_proxy https_proxy ftp_proxy all_proxy  (取消终端环境的全部代理)
+================================================================================
+  THE END
+================================================================================

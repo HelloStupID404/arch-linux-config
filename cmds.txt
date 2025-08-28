@@ -1,0 +1,20 @@
+-- 挂载USB设备
+gio mount -li
+gio mount mtp://Xiaomi_Xiaomi_13_15e976e2/
+gio mount -u mtp://Xiaomi_Xiaomi_13_15e976e2/
+
+-- 引入代理环境变量
+export http_proxy=http://127.0.0.1:7890
+export https_proxy=http://127.0.0.1:7890
+unset http_proxy https_proxy ftp_proxy all_proxy  (取消全部代理)
+https://api.kkhhyytt.cn/api/v1/client/subscribe?token=f2e66d985d8db3f7117f4c5aec92e7fe
+
+-- XWayland程序指定使用Wayland打开
+chromium --ozone-platform=wayland
+         --enable-features=WaylandWindowDecorations
+         --proxy-server="http://127.0.0.1:7890"
+
+-- GRUB字体更改 (建议使用Nerd字体)
+sudo grub-mkfont -o /boot/grub/fonts/Ubuntu.pf2 -s 30 /home/Minami/Downloads/Ubuntu.ttf
+sudo nvim /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
