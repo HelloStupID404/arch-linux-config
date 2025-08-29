@@ -15,6 +15,7 @@
      },
     "hyprland/window": {
         "tooltip": false,
+        "max-length": 50，
     },
     "tray": {
         "icon-size": 21,
