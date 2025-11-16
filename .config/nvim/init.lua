@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
   end,
 })
-vim.cmd('colorscheme nightfox')
+vim.cmd('colorscheme tokyonight-moon')
 ------------
 -- keymaps
 ------------
@@ -96,7 +96,7 @@ keymap.set("n", "<leader>ex", ":terminal chcp 65001 & cls & echo ---------------
 keymap.set("n", "<leader>ja", ":terminal echo ----------------------&echo Welcome To Java Space!&echo ----------------------& java %<CR>", { noremap = true, silent = true })
 -- python
 keymap.set("n", "<leader>py", ":terminal echo ------------------------&echo Welcome To Python Space!&echo ------------------------& python %<CR>", { noremap = true, silent = true })
-local themes = { "nightfox", "dawnfox", "tokyonight-moon","tokyonight-night" }
+local themes = { "tokyonight-moon", "dawnfox", "nightfox", "tokyonight-night" }
 local index = 1
 local function toggle_theme()
   index = index % 4 + 1
