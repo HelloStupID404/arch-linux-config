@@ -1,5 +1,4 @@
 -- Perfection Is A Trap.
--- Simple Config For Linux.
 ------------
 -- options
 ------------
@@ -10,14 +9,6 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "html", "css", "json", "xml",
-    "javascript", "typescript", "markdown", "lua" },
-  callback = function()
-    vim.bo.shiftwidth = 2
-    vim.bo.tabstop = 2
-  end,
-})
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.textwidth = 80
@@ -45,7 +36,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
   callback = function()
-    vim.api.nvim_set_hl(0, "Comment", { bold = true })
+    -- vim.api.nvim_set_hl(0, "Comment", { bold = true })
     vim.api.nvim_set_hl(0, "NvimTreeNormal", { link = "Normal" })
     vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { link = "Normal" })
     vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
@@ -60,7 +51,6 @@ local keymap = vim.keymap
 vim.g.mapleader = " "
 keymap.set("n", "<leader>in", ":e $MYVIMRC<CR>", { noremap = true, silent = true })
 keymap.set("n", "<leader>rs", ":source $MYVIMRC<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>af", ":NvimTreeOpen $HOME<CR>", { noremap = true, silent = true })
 keymap.set("n", "<C-q>", ":q!<CR>", { noremap = true, silent = true })
 keymap.set({"n", "i", "v", "s", "x", "o", "c"}, "fj", "<ESC>")
 keymap.set({'n', 'i', 'v'}, '<C-;>', '<End>')
@@ -70,7 +60,7 @@ keymap.set('n', '<leader>cp', ':<C-r>+')
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 keymap.set('t', 'fj', '<C-\\><C-n>')
-keymap.set('i', '<C-BS>', '<ESC>dbi')
+keymap.set('i', '<C-BS>', '<C-w>')  -- Ctrl+BackSpace
 keymap.set("n", "<leader>sv", "<C-w>v")
 keymap.set("n", "<leader>sh", "<C-w>s")
 -- bufferline
@@ -82,20 +72,20 @@ keymap.set("n", "<leader>b;", ":bufdo bd<CR>")
 -- nvim-tree
 keymap.set("n", "<leader>nt", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 keymap.set("n", "<leader>cd", ":NvimTreeOpen %:p:h<CR>", { noremap = true, silent = true })
-keymap.set("n", "<leader>af", ":NvimTreeOpen D:/A8File/AUTO<CR>", { noremap = true, silent = true })
--- -- lspconfig
--- keymap.set("n", "<leader>gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
--- keymap.set("n", "<leader>gD", ":lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
--- keymap.set("n", "<leader>gr", ":lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true })
--- keymap.set("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
--- keymap.set("n", "<leader>do", ":lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
--- clang
-keymap.set("n", "<leader>cl", ":!cmd /k clang -g -O0 -o %<.exe %<CR>")
-keymap.set("n", "<leader>ex", ":terminal chcp 65001 & cls & echo -------------------& echo Welcome To C Space!&echo -------------------& %<.exe<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>af", ":NvimTreeOpen ~/Documents<CR>", { noremap = true, silent = true })
+-- lspconfig
+keymap.set("n", "<leader>gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>gD", ":lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>gr", ":lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>do", ":lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
+-- c/c++
+keymap.set("n", "<leader>cl", ":!gcc -g -O0 -o %< %<CR>")
+keymap.set("n", "<leader>ex", ":terminal ./%< <CR>", { noremap = true, silent = true })
 -- java
-keymap.set("n", "<leader>ja", ":terminal echo ----------------------&echo Welcome To Java Space!&echo ----------------------& java %<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>ja", ":terminal java % <CR>", { noremap = true, silent = true })
 -- python
-keymap.set("n", "<leader>py", ":terminal echo ------------------------&echo Welcome To Python Space!&echo ------------------------& python %<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>py", ":terminal python % <CR>", { noremap = true, silent = true })
 local themes = { "tokyonight-moon", "dawnfox", "nightfox", "tokyonight-night" }
 local index = 1
 local function toggle_theme()
@@ -168,7 +158,6 @@ require("bufferline").setup{
   options = {
     separator_style = "slant",  -- slant, slope
     show_buffer_close_icons = true,
-    buffer_close_icon = "",
   },
 }
 ------------
@@ -222,7 +211,104 @@ vim.g.rainbow_delimiters = { highlight = highlight }
 require("ibl").setup { scope = { highlight = highlight } }
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 --------------
+-- lspconfig
+require("mason").setup()
+vim.lsp.set_log_level("off")
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '🫤',
+    spacing = 4,
+  },
+  float = {
+    border = "rounded",
+    header = "",
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+})
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = "single",  -- single, double, rounded, solid, shadow
+})
+vim.lsp.enable("clangd")
+vim.lsp.enable("jdtls")
+--------------
+-- nvim-cmp
+local kind_icons = {
+  Text = "󰉿",
+  Method = "󰆧",
+  Function = "󰊕",
+  Constructor = "",
+  Field = "󰜢",
+  Variable = "󰀫",
+  Class = "󰠱",
+  Interface = "",
+  Module = "",
+  Property = "󰜢",
+  Unit = "󰑭",
+  Value = "󰎠",
+  Enum = "",
+  Keyword = "󰌋",
+  Snippet = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "󰈇",
+  Folder = "󰉋",
+  EnumMember = "",
+  Constant = "󰏿",
+  Struct = "󰙅",
+  Event = "",
+  Operator = "󰆕",
+  TypeParameter = "",
+}
+local function cmp_format(entry, vim_item)
+  local kind = vim_item.kind
+  if kind_icons[kind] then
+    vim_item.kind = string.format("%s", kind_icons[kind])
+  end
+  local max_width = 50
+  local label = vim_item.abbr
+  if #label > max_width then
+    vim_item.abbr = string.sub(label, 1, max_width - 3) .."..."
+  end
+  return vim_item
+end
+local luasnip = require("luasnip")
+require("luasnip.loaders.from_vscode").lazy_load()
+require("cmp").setup({
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  sources = {
+    { name = 'buffer' },
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+  window = {
+    completion = {
+      border = "rounded",
+      winhighlight = "Normal:CmpPmenu,FloatBorder:CmpMenuBorder",
+      scrollbar = false,
+      -- winblend = 20,
+    },
+    documentation = require('cmp').config.window.bordered(),
+  },
+  formatting = {
+    format = cmp_format,
+  },
+  mapping = require('cmp').mapping.preset.insert({
+    ['<Tab>'] = require('cmp').mapping.confirm({ select = true }),
+  }),
+})
+-------------
 -- colorizer
-require 'colorizer'.setup()
---------
+require('colorizer').setup()
+-------------
+-- gitsigns
+require('gitsigns').setup()
+------------------
+-- NVIM v0.11.5
 -- END
