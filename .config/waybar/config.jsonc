@@ -18,7 +18,7 @@
         "max-length": 50,
     },
     "tray": {
-        "icon-size": 21,
+        "icon-size": 20,
         "spacing": 10
     },
     "custom/music": {
@@ -49,8 +49,8 @@
     },
     "battery": {
         "states": {
-            "warning": 30,
-            "critical": 15
+            "warning": 40,
+            "critical": 20
         },
         "format": "{icon}{capacity}%",
         "format-charging": " {capacity}%",
@@ -66,16 +66,6 @@
         "format-alt": " {:%d/%m/%Y}",
         "format": " {:%H:%M}"
     },
-    "custom/lock": {
-        "tooltip": false,
-        "on-click": "hyprlock",
-        "format": "",
-    },
-    "custom/power": {
-        "tooltip": false,
-        "on-click": "systemctl poweroff",
-        "format": ""
-    },
     "network": {
         "format-wifi": "󰤨  {essid} ",
         "format-ethernet": "  ",
@@ -86,5 +76,15 @@
         "format-connected": " {device_alias}",
         "format-connected-battery": " {device_alias}{device_battery_percentage}%",
         "tooltip": false,
+    },
+    "custom/lock": {
+        "tooltip": false,
+        "on-click": "hyprlock",
+        "format": "",
+    },
+    "custom/power": {
+        "tooltip": false,
+        "on-click": "systemctl poweroff",
+        "format": ""
     },
 }
