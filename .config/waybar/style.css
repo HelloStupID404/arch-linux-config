@@ -1,4 +1,4 @@
-@import "frappe.css";
+@import "mocha.css";
 
 * {
   font-family: Ubuntu Nerd Font;
@@ -9,51 +9,18 @@
 #waybar {
   background: transparent;
   color: @text;
-  margin: 5px 5px;
-}
-
-#workspaces {
-  border-radius: 1rem;
-  margin: 5px;
-  background-color: rgba(50,50,68,0.8);
-  margin-left: 1rem;
-}
-
-#workspaces button {
-  color: @sky;
-  border-radius: 1rem;
-  padding: 0.4rem;
-}
-
-#workspaces button.active {
-  color: @green;
-  border-radius: 1rem;
-}
-
-#workspaces button:hover {
-  color: @peach;
-  border-radius: 1rem;
 }
 
 #window {
   color: #ffffff;
   background-color: rgba(0,0,0,0.2);
-  padding: 0.5rem 1rem;
-  margin: 5px 0;
+  margin: 5px;
+  padding: 5px 10px;
   border-radius: 1rem;
   border: 2px solid #85c1dc;
 }
 
-#tray {
-  margin-right: 1rem;
-  border-radius: 1rem;
-}
-
-#custom-music {
-  color: @pink;
-  border-radius: 1rem;
-}
-
+#workspaces,
 #tray,
 #custom-music,
 #backlight,
@@ -63,70 +30,98 @@
 #custom-lock,
 #custom-power {
   background-color: rgba(50,50,68,0.8);
-  padding: 0.5rem 1rem;
-  margin: 5px 0;
+}
+
+#workspaces {
+  margin: 5px;
+  border-radius: 1rem;
+}
+
+#workspaces button {
+  color: @sky;
+  padding: 0px 5px;
+  border-radius: 1rem;
+}
+
+#workspaces button.active {
+  color: @green;
+}
+
+#tray {
+  margin: 5px;
+  padding: 0px 10px;
+  border-radius: 1rem;
 }
 
 #custom-music {
-  margin-left: 10;
+  color: @pink;
+  margin: 5px;
+  padding: 0px 10px;
+  border-radius: 1rem;
 }
 
 #backlight {
   color: @yellow;
-  border-radius: 1rem 0px 0px 1rem;
-  margin-left: 1rem;
+  margin: 5px 0 5px 5px;
+  padding: 0 5px 0 10px;
+  border-radius: 1rem 0 0 1rem;
 }
 
 #pulseaudio {
   color: @maroon;
+  margin: 5px 0 5px 0;
+  padding: 0px 5px;
 }
 
 #battery {
   color: @green;
+  margin: 5px 0 5px 0;
+  padding: 0px 5px;
 }
 
 #battery.charging {
   color: @green;
 }
 
-#battery.warning:not(.charging) {
-  color: @red;
+#battery.warning {
+    color: @peach;
 }
 
-
-#pulseaudio, #battery {
-  border-radius: 0;
+#battery.critical {
+    color: @red;
 }
 
 #clock {
   color: @blue;
+  margin: 5px 5px 5px 0;
+  padding: 0 10px 0 5px;
+  border-radius: 0 1rem 1rem 0;
+}
+
+#network {
+  color: @sapphire;
+  margin: 5px 0 5px 5px;
+  padding: 0 8px 0 10px;
+  border-radius: 1rem 0px 0px 1rem;
+}
+
+#bluetooth {
+  color: @teal;
+  margin: 5px 5px 5px 0;
+  padding: 0 10px 0 8px;
   border-radius: 0px 1rem 1rem 0px;
-  margin-right: 1rem;
 }
 
 #custom-lock {
-  border-radius: 1rem 0px 0px 1rem;
   color: @lavender;
+  margin: 5px 0 5px 5px;
+  padding: 0 8px 0 10px;
+  border-radius: 1rem 0px 0px 1rem;
 }
 
 #custom-power {
-  margin-right: 1rem;
-  border-radius: 0px 1rem 1rem 0px;
   color: @red;
+  margin: 5px 5px 5px 0;
+  padding: 0 10px 0 8px;
+  border-radius: 0px 1rem 1rem 0px;
 }
-
-/* #network, */
-/* #bluetooth { */
-/*   background-color: rgba(50,50,68,0.8); */
-/*   padding: 0.5rem 1rem; */
-/*   margin: 5px 0; */
-/*   color: @sapphire; */
-/* } */
-
-/* #network { */
-/*   border-radius: 1rem 0px 0px 1rem; */
-/* } */
-/**/
-/* #bluetooth { */
-/*   border-radius: 0px 1rem 1rem 0px; */
-/* } */
