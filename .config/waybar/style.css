@@ -63,20 +63,20 @@
 #backlight {
   color: @yellow;
   margin: 5px 0 5px 5px;
-  padding: 0 5px 0 10px;
+  padding: 0 8px 0 10px;
   border-radius: 1rem 0 0 1rem;
 }
 
 #pulseaudio {
   color: @maroon;
   margin: 5px 0 5px 0;
-  padding: 0px 5px;
+  padding: 0px 8px;
 }
 
 #battery {
   color: @green;
   margin: 5px 0 5px 0;
-  padding: 0px 5px;
+  padding: 0px 8px;
 }
 
 #battery.charging {
@@ -94,7 +94,7 @@
 #clock {
   color: @blue;
   margin: 5px 5px 5px 0;
-  padding: 0 10px 0 5px;
+  padding: 0 10px 0 8px;
   border-radius: 0 1rem 1rem 0;
 }
 
