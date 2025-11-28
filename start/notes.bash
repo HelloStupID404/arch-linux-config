@@ -29,6 +29,7 @@ sudo grub-mkfont --size=32 -o /boot/grub/fonts/new.pf2 /home/minami/Terminus.ttf
 
 # Download Nerd Fonts on Website.
 sudo pacman -S noto-fonts-emoji noto-fonts-cjk
+sudo fc-cache -fv
 chmod +x /home/minami/.config/waybar/switch.sh
 
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
@@ -39,6 +40,11 @@ sudo systemctl restart getty@tty1
 sudo pacman -S 7zip
 sudo pacman -S fd ripgrep
 sudo pacman -S ncdu
+
+yay -S simple-mtpfs
+simple-mtpfs -l
+simple-mtpfs --device 1 -o allow_other ~/myphone
+fusermount -u ~/myphone
 
 pacman -Qdt
 sudo pacman -Scc
