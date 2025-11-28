@@ -3,19 +3,19 @@
     "position": "top",  // (top|bottom|left|right)
     "modules-left": ["hyprland/workspaces", "custom/music"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["backlight", "pulseaudio", "battery", "clock", "custom/lock", "custom/power"],
+    "modules-right": ["backlight", "pulseaudio", "battery", "clock", "tray"],
 
     "hyprland/workspaces": {
          "disable-scroll": true,
          "sort-by-name": true,
          "format": " {icon} ",
          "format-icons": {
-             "default": "",
-          }
+             "default": ""
+         }
      },
     "hyprland/window": {
         "tooltip": false,
-        "max-length": 50,
+        "max-length": 50
     },
     "tray": {
         "icon-size": 20,
@@ -35,7 +35,7 @@
         "format": "{icon}",
         "format-icons": ["", "", "", "", "", "", "", "", ""],
         "format-alt": "{icon} {percent}%",
-        "tooltip": false,
+        "tooltip": false
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
@@ -44,7 +44,7 @@
             "default": ["", "", " "]
         },
         "format-alt": "{icon}",
-        "tooltip": false,
+        "tooltip": false
         // "on-click": "pavucontrol"
     },
     "battery": {
@@ -57,7 +57,7 @@
         "format-plugged": " ",
         "format-alt": "{icon}",
         "format-icons": [" ", " ", " ", " ", " "],
-        "tooltip": false,
+        "tooltip": false
     },
     "clock": {
         "timezone": "Asia/Shanghai",
@@ -69,22 +69,22 @@
     "network": {
         "format-wifi": "󰤨  {essid} ",
         "format-ethernet": "  ",
-        "tooltip": false,
+        "tooltip": false
     },
     "bluetooth": {
         "format": "",
         "format-connected": " {device_alias}",
         "format-connected-battery": " {device_alias}{device_battery_percentage}%",
-        "tooltip": false,
+        "tooltip": false
     },
     "custom/lock": {
         "tooltip": false,
         "on-click": "hyprlock",
-        "format": "",
+        "format": ""
     },
     "custom/power": {
         "tooltip": false,
         "on-click": "systemctl poweroff",
         "format": ""
-    },
+    }
 }

@@ -1,0 +1,146 @@
+[global]
+    ### Display ###
+    monitor = 0
+    follow = mouse
+    
+    ### Geometry ###
+    width = (280, 380)
+    height = (0, 200)
+    origin = top-right
+    offset = (15, 50)
+    scale = 0
+    notification_limit = 4
+    
+    ### Progress bar ###
+    progress_bar = true
+    progress_bar_height = 10
+    progress_bar_frame_width = 0
+    progress_bar_min_width = 180
+    progress_bar_max_width = 350
+    progress_bar_corner_radius = 5
+    
+    ### Icons ###
+    icon_corner_radius = 8
+    icon_position = left
+    min_icon_size = 48
+    max_icon_size = 64
+    icon_path = /usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/48x48/devices/:/usr/share/icons/Papirus/48x48/apps/
+    
+    ### Appearance ###
+    indicate_hidden = yes
+    separator_height = 0
+    padding = 18
+    horizontal_padding = 18
+    text_icon_padding = 18
+    
+    # 优雅的大圆角
+    corner_radius = 15
+    corners = all
+    
+    # 精致边框
+    frame_width = 2
+    frame_color = "#1e66f5"
+    
+    separator_color = frame
+    
+    # 高亮色
+    highlight = "#1e66f5"
+    
+    ### Text ###
+    # 字体更大更清晰
+    font = Ubuntu Nerd Font 11, Noto Sans CJK SC 11
+    
+    line_height = 4
+    markup = full
+    
+    # 简洁格式
+    format = "<b>%s</b>\n%b"
+    
+    alignment = left
+    vertical_alignment = center
+    
+    show_age_threshold = 60
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+    
+    ### Behavior ###
+    sort = yes
+    idle_threshold = 120
+    
+    ### History ###
+    sticky_history = yes
+    history_length = 30
+    
+    ### Misc/Advanced ###
+    dmenu = /usr/bin/rofi -dmenu -p dunst:
+    browser = /usr/bin/xdg-open
+    
+    always_run_script = true
+    
+    title = Dunst
+    class = Dunst
+    
+    ignore_dbusclose = false
+    
+    ### Mouse ###
+    mouse_left_click = close_current
+    mouse_middle_click = do_action
+    mouse_right_click = close_all
+    
+    ### Transparency ###
+    transparency = 8
+
+[experimental]
+    per_monitor_dpi = false
+
+[urgency_low]
+    background = "#eff1f5"
+    foreground = "#4c4f69"
+    timeout = 6
+    frame_color = "#1e66f5"
+    
+[urgency_normal]
+    background = "#eff1f5"
+    foreground = "#4c4f69"
+    timeout = 10
+    frame_color = "#1e66f5"
+
+[urgency_critical]
+    background = "#eff1f5"
+    foreground = "#4c4f69"
+    frame_color = "#fe640b"
+    timeout = 0
+
+# 应用专属配色
+[app_name="Spotify"]
+    frame_color = "#1DB954"
+
+[app_name="Telegram"]
+    frame_color = "#0088cc"
+
+[app_name="Discord"]
+    frame_color = "#5865F2"
+
+[app_name="VSCode"]
+    frame_color = "#007acc"
+
+[app_name="Firefox"]
+    frame_color = "#ff7139"
+
+[summary="*screenshot*"]
+    frame_color = "#8839ef"
+
+[summary="*volume*"]
+    frame_color = "#1e66f5"
+    
+[summary="*brightness*"]
+    frame_color = "#df8e1d"
+
+[summary="*battery*"]
+    frame_color = "#40a02b"
+
+[summary="*network*"]
+    frame_color = "#04a5e5"

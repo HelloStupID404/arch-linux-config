@@ -47,12 +47,6 @@
   color: @green;
 }
 
-#tray {
-  margin: 5px;
-  padding: 0px 10px;
-  border-radius: 1rem;
-}
-
 #custom-music {
   color: @pink;
   margin: 5px;
@@ -96,6 +90,12 @@
   margin: 5px 5px 5px 0;
   padding: 0 10px 0 8px;
   border-radius: 0 1rem 1rem 0;
+}
+
+#tray {
+  margin: 5px;
+  padding: 0px 10px;
+  border-radius: 1rem;
 }
 
 #network {
