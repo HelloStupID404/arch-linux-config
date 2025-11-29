@@ -29,6 +29,7 @@ require("lazy").setup({
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
+require "neovide"
 require "options"
 require "autocmds"
 
